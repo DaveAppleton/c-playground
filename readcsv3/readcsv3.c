@@ -32,30 +32,38 @@ int getInt(char * line, int pos) {
 int main(void)
 {
     int count = -1;
-    printf("Hello\n");
-    FILE* stream = fopen("input", "r");
+    printf("What is your file name : ");
+    char filename[40];
+    scanf("%s",filename);
+    FILE* stream = fopen(filename, "r"); //"final_input.csv", "r");
 
    if (stream == NULL) {
        printf("File cannot be opened\n");
        return 1;
    }
 
-    int num;
+    
     char line[1024];
     while (fgets(line, 1024, stream))
     {
         char name[15];
         char position[15];
+        int n_rate,we_rate,ph_rate, n_hours,we_hours,ph_hours; // for calculations
         if (count++ == -1) { // ignore headers
             continue;
         }
-        printf("line %d\n",count);
         strcpy(name, getfield(line, 1));
         strcpy(position, getfield(line, 2));
-        printf("Field 3 would be %s\n", getfield(line, 3));
-        num = getInt(line,3);
-        printf("num is %d\n",num*3);
+        n_rate = getInt(line,3);
+        we_rate = getInt(line,4);
+        ph_rate = getInt(line,5);
+        n_hours = getInt(line,6);
+        we_hours = getInt(line,6);
+        ph_hours = getInt(line,7);
 
+        int pay = n_rate * n_hours + we_rate * we_hours + ph_rate * ph_hours;
+
+        printf("%s (%s) earned %d\n",name,position,pay);
         // use above to define a CSV file with employee_name + required data for payroll calc.
         
         
