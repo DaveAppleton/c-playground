@@ -34,7 +34,7 @@ int main(void)
        return 1;
    }
 
-
+    int num;
     char line[1024];
     while (fgets(line, 1024, stream))
     {
@@ -45,7 +45,9 @@ int main(void)
         printf("Field 1 would be %s\n", getfield(line, 1));
         printf("Field 2 would be %s\n", getfield(line, 2));
         printf("Field 3 would be %s\n", getfield(line, 3));
-        // NOTE strtok clobbers tmp
+        sscanf(getfield(line, 3),"%d",&num);
+        printf("num is %d\n",num);
+        
         
     }
 }
